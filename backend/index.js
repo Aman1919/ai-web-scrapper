@@ -7,7 +7,7 @@ const { getJson } = require('serpapi');
 
 const PORT = process.env.PORT || 5000;
 const HOST = process.env.HOST || '127.0.0.1';
-const SERPAPI_KEY = process.env.SERPAPI_KEY || "1ff529ec8f4d384f9d511658feb65e999b4352afc105afb7f96d8bc1ee200aad";
+const SERPAPI_KEY = process.env.SERPAPI_KEY;
 const DEFAULT_LOCATION = process.env.SERPAPI_LL || '@28.6139,77.2090,12z';
 const DEFAULT_LIMIT = 20;
 const TEST_RESULTS_FILE = path.join(__dirname, 'results.csv');
