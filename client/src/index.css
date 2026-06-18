@@ -1,0 +1,154 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #f7f8fb;
+  color: #17202a;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+a {
+  color: #0f6b8f;
+  font-weight: 700;
+}
+
+.app-shell {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.search-panel {
+  display: grid;
+  gap: 22px;
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  color: #637381;
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.05;
+}
+
+.search-form {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 12px;
+}
+
+.search-form input {
+  width: 100%;
+  border: 1px solid #ccd3dc;
+  border-radius: 8px;
+  padding: 14px 16px;
+  background: #ffffff;
+  color: #17202a;
+}
+
+.search-form button {
+  min-width: 126px;
+  border: 0;
+  border-radius: 8px;
+  padding: 14px 18px;
+  background: #16222f;
+  color: #ffffff;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.search-form .secondary-button {
+  border: 1px solid #ccd3dc;
+  background: #ffffff;
+  color: #16222f;
+}
+
+.search-form button:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.error-message {
+  margin: 0;
+  color: #b42318;
+  font-weight: 700;
+}
+
+.results-section {
+  min-height: 280px;
+}
+
+.empty-state {
+  margin: 0;
+  border: 1px dashed #b8c4d2;
+  border-radius: 8px;
+  padding: 28px;
+  color: #52606d;
+  background: #ffffff;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid #d8dee7;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+table {
+  width: 100%;
+  min-width: 1040px;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e5eaf0;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  color: #52606d;
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+td {
+  font-size: 0.92rem;
+}
+
+tr:last-child td {
+  border-bottom: 0;
+}
+
+@media (max-width: 640px) {
+  .app-shell {
+    width: min(100% - 24px, 1180px);
+    padding: 28px 0;
+  }
+
+  .search-form {
+    grid-template-columns: 1fr;
+  }
+
+  .search-form button {
+    width: 100%;
+  }
+}
