@@ -6,7 +6,7 @@ const { chromium } = require('playwright');
 const { getJson } = require('serpapi');
 
 const PORT = process.env.PORT || 5000;
-const HOST = process.env.HOST || '127.0.0.1';
+const HOST = process.env.HOST || '0.0.0.0';
 const SERPAPI_KEY = process.env.SERPAPI_KEY;
 const DEFAULT_LOCATION = process.env.SERPAPI_LL || '@28.6139,77.2090,12z';
 const DEFAULT_LIMIT = 20;
