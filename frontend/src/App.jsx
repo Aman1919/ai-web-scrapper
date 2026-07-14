@@ -1,6 +1,8 @@
 import ScraperDashboard from './ScraperDashboard'
 
 function App() {
+
+  
   return <ScraperDashboard />
 }
 
