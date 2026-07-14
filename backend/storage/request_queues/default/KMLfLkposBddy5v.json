@@ -1,9 +1,0 @@
-{
-	"id": "KMLfLkposBddy5v",
-	"json": "{\"id\":\"KMLfLkposBddy5v\",\"url\":\"https://www.google.com/maps/search/3+star+restaurants+in+delhi/@28.637933,77.2308992,15z\",\"loadedUrl\":\"https://www.google.com/maps/search/3+star+restaurants+in+delhi/@28.637933,77.2308992,15z\",\"uniqueKey\":\"https://www.google.com/maps/search/3+star+restaurants+in+delhi/@28.637933,77.2308992,15z\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-07-14T09:26:13.478Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://www.google.com/maps/search/3+star+restaurants+in+delhi/@28.637933,77.2308992,15z",
-	"url": "https://www.google.com/maps/search/3+star+restaurants+in+delhi/@28.637933,77.2308992,15z"
-}
