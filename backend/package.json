@@ -1,0 +1,26 @@
+{
+  "name": "web-scrapper",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bullmq": "^5.80.2",
+    "cors": "^2.8.6",
+    "crawlee": "^3.17.0",
+    "crypto": "^1.0.1",
+    "events": "^3.3.0",
+    "express": "^5.2.1",
+    "ioredis": "^5.11.1",
+    "playwright": "^1.61.1"
+  },
+  "devDependencies": {
+    "@bull-board/api": "^8.1.2",
+    "@bull-board/express": "^8.1.2"
+  }
+}
