@@ -1,9 +1,0 @@
-{
-	"id": "HmSdR31QLvEbBMv",
-	"json": "{\"id\":\"HmSdR31QLvEbBMv\",\"url\":\"https://www.google.com/maps/search/cafes+in+majnu+ka+tila+delhi/@28.637933,77.2308992,15z\",\"loadedUrl\":\"https://www.google.com/maps/search/cafes+in+majnu+ka+tila+delhi/@28.637933,77.2308992,15z\",\"uniqueKey\":\"https://www.google.com/maps/search/cafes+in+majnu+ka+tila+delhi/@28.637933,77.2308992,15z\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-07-14T11:12:57.956Z\"}",
-	"method": "GET",
-	"orderNo": null,
-	"retryCount": 0,
-	"uniqueKey": "https://www.google.com/maps/search/cafes+in+majnu+ka+tila+delhi/@28.637933,77.2308992,15z",
-	"url": "https://www.google.com/maps/search/cafes+in+majnu+ka+tila+delhi/@28.637933,77.2308992,15z"
-}
