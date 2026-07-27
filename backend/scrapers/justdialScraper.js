@@ -1,4 +1,5 @@
 import { PlaywrightCrawler } from 'crawlee';
+import { extractWithLLM } from '../langchain/llmExtractor.js';
 
 // Resource types we never need for text/link extraction. Blocking these
 // speeds up page loads AND reduces per-page memory footprint — useful on
@@ -167,7 +168,7 @@ export async function scrapeJustDial({ searchUrl, targetCount = 50, maxConcurren
                 await blockHeavyResources(page);
                 await page.waitForSelector('h1.compney', { timeout: 15000 });
 
-                const data = await page.evaluate(() => {
+                let data = await page.evaluate(() => {
                     const name = document.querySelector('h1.compney')?.innerText?.trim() || '';
                     const phone = document.querySelector('a[href^="tel:"]')?.innerText?.trim() || '';
                     const ratingRaw = document.querySelector('.vendbox_rateavg')?.innerText || '';
@@ -201,16 +202,37 @@ export async function scrapeJustDial({ searchUrl, targetCount = 50, maxConcurren
                         address,
                         website,
                         gstin,
-                        categories, 
+                        categories,
                         yearsInBusiness,
                         businessSummary,
                     };
                 });
 
+                // Selectors clearly missed something critical — likely JustDial's
+                // DOM shifted. Fall back to LLM extraction rather than losing the listing.
+                const missingCriticalFields = !data.name || !data.phone;
+                let extractedVia = 'selectors';
+
+                if (missingCriticalFields) {
+                    const llmResult = await extractWithLLM(page, onLog);
+                    if (llmResult) {
+                        // Merge: keep any selector-extracted fields that DID work,
+                        // fill gaps with LLM output rather than fully overwriting.
+                        data = {
+                            ...data,
+                            ...Object.fromEntries(
+                                Object.entries(llmResult).filter(([_, v]) => v)
+                            ),
+                        };
+                        extractedVia = 'llm-fallback';
+                        onLog(`[justdial] Recovered via LLM fallback: "${data.name}"`);
+                    }
+                }
+
                 log.info(`Pass 2: scraped ${data.name}`);
                 onLog(`[justdial] Pass 2 — scraped "${data.name}" (${results.length + 1}/${placeUrls.length})`);
 
-                results.push({ ...data, sourceUrl: request.url });
+                results.push({ ...data, sourceUrl: request.url, extractedVia });
             } catch (err) {
                 log.error(`Pass 2: failed on ${request.url}: ${err.message}`);
                 onLog(`[justdial] Failed on ${request.url}: ${err.message}`);
