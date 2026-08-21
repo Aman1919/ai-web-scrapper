@@ -1,0 +1,9 @@
+{
+	"id": "A9hzIPkDH5mcNb5",
+	"json": "{\"id\":\"A9hzIPkDH5mcNb5\",\"url\":\"https://fonts.googleapis.com/about-us\",\"loadedUrl\":\"https://fonts.googleapis.com/about-us\",\"uniqueKey\":\"https://fonts.googleapis.com/about-us\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"label\":\"EXTERNAL_SITE\",\"companyKey\":\"Meru Technosoft Private Limited\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-08-21T17:10:55.056Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://fonts.googleapis.com/about-us",
+	"url": "https://fonts.googleapis.com/about-us"
+}

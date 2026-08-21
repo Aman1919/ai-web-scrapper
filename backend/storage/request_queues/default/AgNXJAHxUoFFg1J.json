@@ -1,0 +1,9 @@
+{
+	"id": "AgNXJAHxUoFFg1J",
+	"json": "{\"id\":\"AgNXJAHxUoFFg1J\",\"url\":\"https://fonts.googleapis.com/contact\",\"loadedUrl\":\"https://fonts.googleapis.com/contact\",\"uniqueKey\":\"https://fonts.googleapis.com/contact\",\"method\":\"GET\",\"noRetry\":false,\"retryCount\":0,\"errorMessages\":[],\"headers\":{},\"userData\":{\"label\":\"EXTERNAL_SITE\",\"companyKey\":\"Senso Vision System\",\"__crawlee\":{\"state\":4}},\"handledAt\":\"2026-08-21T17:10:54.879Z\"}",
+	"method": "GET",
+	"orderNo": null,
+	"retryCount": 0,
+	"uniqueKey": "https://fonts.googleapis.com/contact",
+	"url": "https://fonts.googleapis.com/contact"
+}

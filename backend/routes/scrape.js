@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { jobManager } from '../jobs/jobmanager.js';
 import { scrapeGoogleMaps } from '../scrapers/googlemapsScraper.js';
 import { scrapeJustDial } from '../scrapers/justdialScraper.js';
-
+import {scrapeInternshala} from '../scrapers/internshalaScraper.js';
 export const scrapeRouter = Router();
 
 function buildJustDialUrl(category, city = 'Delhi') {
@@ -18,7 +18,7 @@ function buildJustDialUrl(category, city = 'Delhi') {
 scrapeRouter.post('/scrape', (req, res) => {
     const { source, query, targetCount = 50 } = req.body;
 
-    if (!source || !['maps', 'justdial'].includes(source)) {
+    if (!source || !['maps', 'justdial','internshala'].includes(source)) {
         return res.status(400).json({ error: 'source must be "maps" or "justdial"' });
     }
     if (!query || typeof query !== 'string') {
@@ -44,7 +44,7 @@ async function runJob(jobId, source, query, targetCount) {
     const results =
         source === 'maps'
             ? await scrapeGoogleMaps({ query, targetCount, onLog })
-            : await scrapeJustDial({ searchUrl: buildJustDialUrl(query), targetCount, onLog });
+            :(source==='internshala')?await scrapeInternshala({ query, targetCount, onLog }): await scrapeJustDial({ searchUrl: buildJustDialUrl(query), targetCount, onLog });
 
     jobManager.setResults(jobId, results);
     jobManager.setStatus(jobId, 'completed');

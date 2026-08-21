@@ -1,5 +1,7 @@
 import { PlaywrightCrawler } from 'crawlee';
 import { extractWithLLM } from '../langchain/llmExtractor.js';
+import fs from 'fs';
+import path from 'path';
 
 // Resource types we never need for text/link extraction. Blocking these
 // speeds up page loads AND reduces per-page memory footprint — useful on
@@ -37,6 +39,25 @@ async function dismissPopups(page, onLog) {
         } catch {
             // selector not present or not clickable — ignore and move on
         }
+    }
+}
+
+// Directory where we dump a screenshot + HTML snapshot whenever a request
+// fails, so we can SEE what JustDial actually served (captcha? title
+// screen? empty shell?) instead of guessing from log text alone.
+const DEBUG_DIR = path.resolve('./debug-snapshots');
+async function saveFailureSnapshot(page, tag, onLog) {
+    try {
+        await fs.promises.mkdir(DEBUG_DIR, { recursive: true });
+        const stamp = Date.now();
+        const shotPath = path.join(DEBUG_DIR, `${tag}-${stamp}.png`);
+        const htmlPath = path.join(DEBUG_DIR, `${tag}-${stamp}.html`);
+        await page.screenshot({ path: shotPath, fullPage: true }).catch(() => {});
+        const html = await page.content().catch(() => null);
+        if (html) await fs.promises.writeFile(htmlPath, html, 'utf-8');
+        onLog(`[justdial] Saved failure snapshot: ${shotPath}`);
+    } catch (err) {
+        onLog(`[justdial] Could not save failure snapshot: ${err.message}`);
     }
 }
 
@@ -106,6 +127,7 @@ export async function scrapeJustDial({ searchUrl, targetCount = 50, maxConcurren
                 onLog(`[justdial] Page title: "${title}"`);
                 onLog(`[justdial] Final URL: ${currentUrl}`);
                 onLog(`[justdial] Page text snippet: ${bodySnippet}`);
+                await saveFailureSnapshot(page, 'pass1-selector-timeout', onLog);
                 throw err;
             }
 
@@ -138,10 +160,23 @@ export async function scrapeJustDial({ searchUrl, targetCount = 50, maxConcurren
                 onLog(
                     `[justdial] WARNING: ${previousCount} cards found but 0 links matched ".resultbox_title_anchorbox" — JustDial's DOM structure for the link may have changed. Check selectors.`
                 );
+                await saveFailureSnapshot(page, 'pass1-links-empty', onLog);
             }
 
             placeUrls = [...new Set(links)].slice(0, targetCount);
             onLog(`[justdial] Pass 1 complete — ${placeUrls.length} unique URLs`);
+        },
+        // These two are new: previously, if page.goto() itself failed
+        // (network reset, block, DNS issue, etc.) Crawlee would silently
+        // retry a few times and then give up — none of that ever hit onLog,
+        // which is why the log jumped straight from "Starting search" to
+        // "No URLs collected" with nothing useful in between.
+        errorHandler: async ({ page, request }, error) => {
+            onLog(`[justdial] Pass 1 attempt failed for ${request.url}: ${error.message}`);
+            if (page) await saveFailureSnapshot(page, 'pass1-attempt-error', onLog);
+        },
+        failedRequestHandler: async ({ request }, error) => {
+            onLog(`[justdial] Pass 1 request permanently failed after all retries: ${error?.message}`);
         },
         maxRequestsPerCrawl: 1,
     });
@@ -236,7 +271,15 @@ export async function scrapeJustDial({ searchUrl, targetCount = 50, maxConcurren
             } catch (err) {
                 log.error(`Pass 2: failed on ${request.url}: ${err.message}`);
                 onLog(`[justdial] Failed on ${request.url}: ${err.message}`);
+                await saveFailureSnapshot(page, 'pass2-detail-error', onLog);
             }
+        },
+        errorHandler: async ({ page, request }, error) => {
+            onLog(`[justdial] Pass 2 attempt failed for ${request.url}: ${error.message}`);
+            if (page) await saveFailureSnapshot(page, 'pass2-attempt-error', onLog);
+        },
+        failedRequestHandler: async ({ request }, error) => {
+            onLog(`[justdial] Pass 2 request permanently failed after all retries: ${request.url} — ${error?.message}`);
         },
     });
 

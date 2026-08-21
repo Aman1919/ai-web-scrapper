@@ -1,50 +1,29 @@
 {
-  "requestsFinished": 0,
-  "requestsFailed": 1,
-  "requestsRetries": 1,
+  "requestsFinished": 1,
+  "requestsFailed": 0,
+  "requestsRetries": 0,
   "requestsFailedPerMinute": 0,
-  "requestsFinishedPerMinute": 0,
-  "requestMinDurationMillis": null,
-  "requestMaxDurationMillis": 0,
-  "requestTotalFailedDurationMillis": 45253,
-  "requestTotalFinishedDurationMillis": 0,
-  "crawlerStartedAt": "2026-07-22T11:52:56.564Z",
-  "crawlerFinishedAt": "2026-07-22T11:55:58.055Z",
-  "statsPersistedAt": "2026-07-22T11:55:58.055Z",
-  "crawlerRuntimeMillis": 181722,
-  "crawlerLastStartTimestamp": 1784721176333,
+  "requestsFinishedPerMinute": 9,
+  "requestMinDurationMillis": 5930,
+  "requestMaxDurationMillis": 5930,
+  "requestTotalFailedDurationMillis": 0,
+  "requestTotalFinishedDurationMillis": 5930,
+  "crawlerStartedAt": "2026-08-21T17:10:46.575Z",
+  "crawlerFinishedAt": "2026-08-21T17:10:53.005Z",
+  "statsPersistedAt": "2026-08-21T17:10:53.005Z",
+  "crawlerRuntimeMillis": 6948,
+  "crawlerLastStartTimestamp": 1787332246057,
   "requestRetryHistogram": [
-    null,
-    null,
-    null,
     1
   ],
   "statsId": 0,
-  "requestAvgFailedDurationMillis": 45253,
-  "requestAvgFinishedDurationMillis": null,
-  "requestTotalDurationMillis": 45253,
+  "requestAvgFailedDurationMillis": null,
+  "requestAvgFinishedDurationMillis": 5930,
+  "requestTotalDurationMillis": 5930,
   "requestsTotal": 1,
-  "requestsWithStatusCode": {},
-  "errors": {
-    "/home/aman1919/Desktop/projects/web scrapper/backend/node_modules/@crawlee/playwright/internals/utils/playwright-utils.js:165:17": {
-      "missing error code": {
-        "TimeoutError": {
-          "page.goto: Timeout 45000ms exceeded.": {
-            "count": 1
-          }
-        }
-      }
-    }
+  "requestsWithStatusCode": {
+    "200": 1
   },
-  "retryErrors": {
-    "/home/aman1919/Desktop/projects/web scrapper/backend/node_modules/@crawlee/playwright/internals/utils/playwright-utils.js:165:17": {
-      "missing error code": {
-        "TimeoutError": {
-          "page.goto: Timeout 45000ms exceeded.": {
-            "count": 3
-          }
-        }
-      }
-    }
-  }
+  "errors": {},
+  "retryErrors": {}
 }
