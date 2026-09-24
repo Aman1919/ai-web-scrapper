@@ -134,3 +134,14 @@ The dashboard talks to `http://localhost:4000/api` — update `API_BASE` at the 
 - [ ] Toggle in the dashboard UI for `scrapeWebsites` (skip the website pass for faster runs).
 - [ ] JustDial category → `nct` code lookup table for more precise search URLs.
 - [ ] Proxy rotation for scaling past Google/JustDial's block thresholds.
+
+## Video
+
+https://github.com/user-attachments/assets/3875c2b0-659b-49fc-aa59-316cdc410462
+
+
+
+
+
+
+
